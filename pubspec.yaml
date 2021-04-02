@@ -1,8 +1,7 @@
 name: oracle_responsys_sdk
 description: A new Flutter plugin.
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/Sivassankar/Oracle_responsys_sdk.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
