@@ -31,3 +31,10 @@ android {
         disable 'InvalidPackage'
     }
 }
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['PushIOManager.aar'])
+
+}
+
+

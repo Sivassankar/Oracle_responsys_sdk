@@ -24,6 +24,7 @@ public class MainActivity extends FlutterActivity {
                 new MethodChannel.MethodCallHandler() {
                     @Override
                     public void onMethodCall(MethodCall call, MethodChannel.Result result) {
+/*
                         if (call.method.equals("getUserRegisterId")) {
                             PushIOManager.getInstance(getApplicationContext()).registerApp();
                             PushIOManager.getInstance(getApplicationContext()).registerUserId("sivasankar6688@gmail.com");
@@ -31,6 +32,7 @@ public class MainActivity extends FlutterActivity {
 
 
                         }
+*/
                     }});
 
     }
