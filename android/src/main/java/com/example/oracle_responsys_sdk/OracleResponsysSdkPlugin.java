@@ -39,9 +39,9 @@ public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin,
     }
  if (call.method.equals("getUserRegisterId")) {
 
-//   PushIOManager.getInstance(this).registerApp();
-//   PushIOManager.getInstance(this).registerUserId("sivasankar6688@gmail.com");
-     PushIOManager.getInstance(getApplicationContext()).setOracleCXAccountId("YOUR_ACCOUNT_GUID");
+   PushIOManager.getInstance(this).registerApp();
+   PushIOManager.getInstance(this).registerUserId("sivasankar6688@gmail.com");
+//     PushIOManager.getInstance(getApplicationContext()).setOracleCXAccountId("YOUR_ACCOUNT_GUID");
      result.success( PushIOManager.getInstance(this).getRegisteredUserId());
     } else {
       result.notImplemented();
