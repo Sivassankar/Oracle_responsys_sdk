@@ -12,11 +12,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
-import com.pushio.manager.PushIOManager;
-
-
-
-
+import com.oracle.cx.mobilesdk.*;
 
 /** OracleResponsysSdkPlugin */
 public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin, MethodCallHandler {
@@ -43,10 +39,10 @@ public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin,
     }
  if (call.method.equals("getUserRegisterId")) {
 
-   PushIOManager.getInstance(this).registerApp();
-   PushIOManager.getInstance(this).registerUserId("sivasankar6688@gmail.com");
-
-      result.success( PushIOManager.getInstance(this).getRegisteredUserId());
+//   PushIOManager.getInstance(this).registerApp();
+//   PushIOManager.getInstance(this).registerUserId("sivasankar6688@gmail.com");
+     PushIOManager.getInstance(getApplicationContext()).setOracleCXAccountId("YOUR_ACCOUNT_GUID");
+     result.success( PushIOManager.getInstance(this).getRegisteredUserId());
     } else {
       result.notImplemented();
     }
