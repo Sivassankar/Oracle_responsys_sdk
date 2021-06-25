@@ -13,27 +13,9 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
 
-
-    private static final String CHANNEL = "oracle_responsys_sdk";
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        GeneratedPluginRegistrant.registerWith(getFlutterEngine());
-
-        new MethodChannel(getFlutterEngine().getDartExecutor().getBinaryMessenger(), CHANNEL).setMethodCallHandler(
-                new MethodChannel.MethodCallHandler() {
-                    @Override
-                    public void onMethodCall(MethodCall call, MethodChannel.Result result) {
-
-                        if (call.method.equals("getUserRegisterId")) {
-                            PushIOManager.getInstance(getApplicationContext()).registerApp();
-                            PushIOManager.getInstance(getApplicationContext()).registerUserId("sivasankar6688@gmail.com");
-                            result.success(PushIOManager.getInstance(getApplicationContext()).getRegisteredUserId() );
-
-
-                        }
-
-                    }});
-
-    }
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        GeneratedPluginRegistrant.registerWith(getFlutterEngine());
+//    }
 }

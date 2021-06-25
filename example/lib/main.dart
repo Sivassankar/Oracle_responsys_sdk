@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oracle_responsys_sdk/oracle_responsys_sdk.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await OracleResponsysSdk.getRegisterUserId;
+      // platformVersion = await OracleResponsysSdk.getRegisterUserId;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
