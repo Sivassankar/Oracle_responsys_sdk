@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
-
-import com.oracle.cx.mobilesdk.ORADataCollector;
-import com.oracle.cx.mobilesdk.ORAEventMeta;
-
 import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -19,10 +15,17 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
+import com.oracle.cx.mobilesdk.ORABaseConfigSettings;
+import com.oracle.cx.mobilesdk.ORADataCollector;
+import com.oracle.cx.mobilesdk.ORAEventMeta;
+import com.oracle.cx.mobilesdk.contracts.IORAConfigSetting;
+import com.oracle.cx.mobilesdk.exceptions.ORAModuleIDException;
+import com.oracle.cx.mobilesdk.persistent.ORACoreDataContainer;
+
 /**
  * OracleResponsysSdkPlugin
  */
-public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin, MethodCallHandler, ActivityAware {
+public class OracleResponsysSdkPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -43,33 +46,26 @@ public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin,
     private static String AD_NAME = "adName";
     private static String AD_NAMES = "adNames";
     private static String ARGUMENTS = "arguments";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity.getApplicationContext();
-    }
+    private ORACoreDataContainer container;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), CHANNEL_NAME);
         channel.setMethodCallHandler(this);
+        init();
+    }
+    private void init(){
+            try {
+                ORADataCollector.setApplication(activity.getApplication());
+                container = new ORACoreDataContainer(activity);
+                container.loadFromConfigFile();
+            } catch (ORAModuleIDException e) {
+                e.printStackTrace();
+            }
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-//        if (call.method.equals("getPlatformVersion")) {
-//            result.success("Android " + android.os.Build.VERSION.RELEASE);
-//        } else if (call.method.equals("triggerCustomEvent")) {
-//            result.success(triggerCustomEvent((Map<String, Object>) call.argument(ARGUMENTS)));
-//        } else if (call.method.equals("triggerApplicationStartEvent")) {
-//            result.success(triggerApplicationStartEvent((Map<String, Object>) call.argument(ARGUMENTS)));
-//        } else if (call.method.equals("triggerAdClickEvent")) {
-//            result.success(triggerAdClickEvent((Map<String, Object>) call.argument(ARGUMENTS)));
-//        } else {
-//            result.notImplemented();
-//        }
-
         switch (call.method) {
             case "triggerCustomEvent": {
                 result.success(triggerCustomEvent((Map<String, Object>) call.argument(ARGUMENTS)));
@@ -114,16 +110,9 @@ public class OracleResponsysSdkPlugin extends Activity implements FlutterPlugin,
         this.activity = null;
     }
 
-
-//    public Map<String, String> triggerApplicationStartEvent(Map<String, Object> value) {
-//        return ORADataCollector.getInstance().triggerApplicationStartEvent((String) value.get(APPLICATION_NAME), (Map<String, String>) value.get(CUSTOM_DATA));
-//    }
-
-    public String triggerApplicationStartEvent(Map<String, Object> value) {
-        System.out.println("Android First1="+ (String) value.get("First"));
+    public Map<String, String> triggerApplicationStartEvent(Map<String, Object> value) {
         Map<String, String> childMap = (Map<String, String>) value.get("customKey");
-        System.out.println("Android childKey="+ childMap.get("childKey"));
-        return "triggerApplicationStartEvent Response";
+        return ORADataCollector.getInstance().triggerApplicationStartEvent((String) value.get(APPLICATION_NAME), (Map<String, String>) value.get(CUSTOM_PARAMS));
     }
 
 

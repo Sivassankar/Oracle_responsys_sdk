@@ -1,0 +1,3 @@
+{"ORAEndPointConfig":[{"ora_dc_collection_url":"http://dc.oracleinfinity.io/v3/",
+	"ora_dc_account_guid":"29ac35499c0d4d600a9c0eb0a3c174ad",
+	"ora_dc_retry_count":"2"}],"ora_dc_debug":"true","config_version": 1}
