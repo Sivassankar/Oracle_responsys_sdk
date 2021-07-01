@@ -1,2 +1,0 @@
-configurations.maybeCreate("default")
-artifacts.add("default", file('oracle-cx-infinity-1.1.0.aar'))
