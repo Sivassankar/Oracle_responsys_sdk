@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':oracle-cx-mobile-sdk-1.1.1')
+    implementation project(path: ':oracle-cx-infinity-1.1.0')
 //        implementation fileTree(dir: 'libs', include: ['*.aar'])
 }
 

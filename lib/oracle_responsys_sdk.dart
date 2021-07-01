@@ -12,18 +12,35 @@ class OracleResponsysSdk {
     return version;
   }
 
+  // static Future<Map<String, String>> triggerCustomEvent(
+  //     Map<String, Object> arguments) async {
+  //   final Map<String, String> version = await _channel
+  //       .invokeMethod('triggerCustomEvent', {ARGUMENTS: arguments});
+  //   return version;
+  // }
+
   static Future<Map<String, String>> triggerCustomEvent(
       Map<String, Object> arguments) async {
-    final Map<String, String> version = await _channel
-        .invokeMethod('triggerCustomEvent', {ARGUMENTS: arguments});
-    return version;
+    Map<dynamic, dynamic> myMap = Map<String, String>.from(
+        Map<dynamic, dynamic>.from(await _channel
+            .invokeMethod('triggerCustomEvent', {ARGUMENTS: arguments})));
+    // final Map<String, String> version = Map<String, String>.from(myMap);
+    print('===========================');
+    print('===========================');
+    print(myMap.values.toList());
+    return myMap;
   }
 
   static Future<Map<String, String>> triggerApplicationStartEvent(
       Map<String, Object> arguments) async {
-    final Map<String, String> version = await _channel
-        .invokeMethod('triggerApplicationStartEvent', {ARGUMENTS: arguments});
-    return version;
+    Map<dynamic, dynamic> myMap = Map<String, String>.from(
+        Map<dynamic, dynamic>.from(await _channel.invokeMethod(
+            'triggerApplicationStartEvent', {ARGUMENTS: arguments})));
+    // final Map<String, String> version = Map<String, String>.from(myMap);
+    print('mmmmmmmmmmmmmmmmmmmm');
+    print('mmmmmmmmmmmmmmmmmmmm');
+    print(myMap.values.toList());
+    return myMap;
   }
 
   static Future<Map<String, String>> triggerApplicationErrorEvent(

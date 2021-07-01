@@ -1,3 +1,5 @@
+include ':oracle-cx-infinity-1.1.0'
+include ':oracle-cx-mobile-sdk-1.1.1'
 include ':app'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
